@@ -1,0 +1,23 @@
+defaults: &defaults
+  app_name: ""
+  domain: ""
+  facebook_app_id: ""
+  facebook_secret: ""
+  imsu_name: ""
+  imsu_passwd: ""
+  hipchat_token:
+  hipchat_room_name:
+  admin_emails:
+    - ""
+  google_analytics_key: ""
+  default_logo_url: "/logo.png"
+  email_sender: ""
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

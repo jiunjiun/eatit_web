@@ -43,3 +43,27 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'haml'
+
+gem 'compass-rails'
+
+# bootstrap
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github  => 'anjlab/bootstrap-rails'
+
+# config file
+gem 'settingslogic'
+
+# auto page
+gem 'kaminari'
+
+# omniauth facebook
+gem 'omniauth'
+gem 'omniauth-facebook'
+
+# upload file
+gem 'carrierwave'
+gem 'mini_magick'
+
+
