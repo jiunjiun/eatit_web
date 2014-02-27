@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  restaurant_id: 
+  overall: 1
+  delicious: 1
+  service: 1
+  queues: 1
+  feel: 1
+  user_id: 
+  comment: MyString
+
+two:
+  restaurant_id: 
+  overall: 1
+  delicious: 1
+  service: 1
+  queues: 1
+  feel: 1
+  user_id: 
+  comment: MyString
