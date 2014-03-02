@@ -4,8 +4,9 @@ class CreateRestaurants < ActiveRecord::Migration
       t.string :category
       t.string :name
       t.string :address
-      t.float :lat
-      t.float :long
+      t.string :telphone
+      t.float  :lat
+      t.float  :long
 
       t.timestamps
     end

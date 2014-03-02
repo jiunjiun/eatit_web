@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.string :fb_id,  :limit   => 30
-      t.string :toekn
+      t.string :token
 
       t.timestamps
     end

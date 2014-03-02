@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  restaurant_id: 
+  user_id: 
+  task_id: 
+  name: MyString
+  size: MyString
+  content_type: MyString
+
+two:
+  restaurant_id: 
+  user_id: 
+  task_id: 
+  name: MyString
+  size: MyString
+  content_type: MyString

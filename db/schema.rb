@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20140226063321) do
     t.string   "name"
     t.string   "email"
     t.string   "fb_id",      limit: 30
-    t.string   "toekn"
+    t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

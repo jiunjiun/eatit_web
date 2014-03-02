@@ -1,5 +1,19 @@
 EatitWeb::Application.routes.draw do
   root "index#index"
+
+  get  'sign_in'                 => 'users#sign_in'
+  get  'auth/:provider/callback' => 'users#auth_fb'
+  get  'sign_failure'            => 'users#failure'
+  # get  'sign_up'                 => 'users#sign_up'
+  post 'sign_upping'             => 'users#sign_upping'
+  get  'sign_out'                => 'users#sign_out'
+  get  'user/account'            => 'users#account'
+
+  namespace :dashboard do
+    root "index#index"
+
+    resources :task
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
