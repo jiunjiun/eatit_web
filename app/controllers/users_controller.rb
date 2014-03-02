@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         authUser.save
       end
       session[:UserInfo] = { id: authUser.id, fb_id: authUser.fb_id, name: authUser.name}
-      redirect_to dashboard_path
+      redirect_to dashboard_root_path
     else
       redirect_to sign_failure_path
     end

@@ -11,12 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226063321) do
+ActiveRecord::Schema.define(version: 20140302070148) do
+
+  create_table "friends", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "friends", ["friend_id"], name: "index_friends_on_friend_id", using: :btree
+  add_index "friends", ["user_id"], name: "index_friends_on_user_id", using: :btree
+
+  create_table "gorup_tasks", force: true do |t|
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.string   "invite_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "gorup_tasks", ["task_id"], name: "index_gorup_tasks_on_task_id", using: :btree
+  add_index "gorup_tasks", ["user_id"], name: "index_gorup_tasks_on_user_id", using: :btree
+
+  create_table "pictures", force: true do |t|
+    t.integer  "restaurant_id"
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.string   "name"
+    t.string   "size"
+    t.string   "content_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pictures", ["restaurant_id"], name: "index_pictures_on_restaurant_id", using: :btree
+  add_index "pictures", ["task_id"], name: "index_pictures_on_task_id", using: :btree
+  add_index "pictures", ["user_id"], name: "index_pictures_on_user_id", using: :btree
 
   create_table "restaurants", force: true do |t|
     t.string   "category"
     t.string   "name"
     t.string   "address"
+    t.string   "telphone"
     t.float    "lat"
     t.float    "long"
     t.datetime "created_at"
@@ -40,7 +77,7 @@ ActiveRecord::Schema.define(version: 20140226063321) do
   add_index "scores", ["user_id"], name: "index_scores_on_user_id", using: :btree
 
   create_table "tasks", force: true do |t|
-    t.string   "status"
+    t.string   "status",        default: "N"
     t.integer  "user_id"
     t.integer  "restaurant_id"
     t.datetime "created_at"
