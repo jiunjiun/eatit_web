@@ -1,4 +1,4 @@
-class Dashboard::TaskController < ApplicationController
+class Dashboard::TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :destroy]
 
   def index
@@ -9,12 +9,11 @@ class Dashboard::TaskController < ApplicationController
   end
 
   def new
-    @restaurant = Restaurant.new
-
+    # @restaurant = Restaurant.new
   end
 
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    # @restaurant = Restaurant.new(restaurant_params)
     # if @restaurant.save
     #   @task = Task.new({user: session[:UserInfo].id})
     # else
