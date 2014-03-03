@@ -1,0 +1,10 @@
+%h1 index - Restaurant
+= link_to 'Add', new_dashboard_restaurant_path
+
+%table
+  - @restaurants.each do |restaurant|
+    %tr
+      %td
+        = restaurant.name
+      %td
+        = restaurant.address

@@ -1,0 +1,24 @@
+%h1 New
+
+= form_tag search_dashboard_restaurants_path, method: :get, remote: true, id: 'search' do
+  = text_field_tag :name, '', placeholder: '店名'
+  = text_field_tag :address, '', placeholder: '地區、路名'
+  = submit_tag 'Search', class: 'btn btn-success'
+
+#liveSearch
+  %ul#results
+
+
+/= form_for @restaurant, url: {:action=>"create", :controller=>"dashboard/task"} do |f|
+/  %p name
+/  = f.text_field :name, class: 'form-control'
+
+/  %p address
+/  = f.text_field :address, class: 'form-control'
+
+/  %p category
+/  = f.text_field :category, class: 'form-control'
+/ # = f.select(:category, options_for_select([[t('study.master'), "master"], [t('study.university'), "university"]]), {}, {:class=>'form-control'})
+
+/  %p
+/  = f.submit 'Create', class: 'btn btn-success'

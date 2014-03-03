@@ -40,7 +40,6 @@ class UsersController < ApplicationController
   end
 
   def failure
-    # flash[:notice] = 'failure'
     redirect_to root_path
   end
 

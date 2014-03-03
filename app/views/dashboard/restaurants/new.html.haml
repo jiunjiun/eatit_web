@@ -1,0 +1,15 @@
+= form_for @restaurant, url: dashboard_restaurants_path do |f|
+  %p name
+  = f.text_field :name
+
+  %p address
+  = f.text_field :address
+
+  %p telphone
+  = f.telephone_field :telephone
+
+  %p category
+  = f.text_field :category
+
+  %p
+  = f.submit 'Create', class: 'btn btn-success'
