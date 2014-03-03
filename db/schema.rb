@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140302070148) do
   create_table "restaurants", force: true do |t|
     t.string   "category"
     t.string   "name"
+    t.string   "area"
     t.string   "address"
     t.string   "telephone"
     t.integer  "count"

@@ -3,6 +3,7 @@ class CreateRestaurants < ActiveRecord::Migration
     create_table :restaurants do |t|
       t.string  :category
       t.string  :name
+      t.string  :area
       t.string  :address
       t.string  :telephone
       t.integer :count,    defualt: 0
