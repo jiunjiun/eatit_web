@@ -49,8 +49,8 @@ gem 'haml'
 gem 'compass-rails'
 
 # bootstrap
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
-                              :github  => 'anjlab/bootstrap-rails'
+gem 'bootstrap-sass', '~> 3.1.1'
+gem "font-awesome-rails"
 
 # config file
 gem 'settingslogic'
