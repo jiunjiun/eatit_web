@@ -1,25 +1,25 @@
 class Dashboard::TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :destroy]
+  before_action :set_task, only: [:show, :edit, :destroy, :finish]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.where({status: 'N'}).all
   end
 
   def show
   end
 
   def new
-    # @restaurant = Restaurant.new
+    # @restaurant = Restaurant.newtaskcon
   end
 
   def create
-    # @restaurant = Restaurant.new(restaurant_params)
-    # if @restaurant.save
-    #   @task = Task.new({user: session[:UserInfo].id})
-    # else
+    @task = Task.new({ restaurant_id: params[:restaurant], user_id: session[:UserInfo][:id]})
 
-    # end
-    render text: {user: session[:UserInfo][:id], restaurant: @restaurant.id}.to_json
+    if @task.save
+      redirect_to dashboard_tasks_path
+    else
+
+    end
   end
 
   def edit
@@ -34,12 +34,17 @@ class Dashboard::TasksController < ApplicationController
 
   end
 
+  def finish
+    @task.update_attributes(status: 'Y')
+    redirect_to dashboard_tasks_path
+  end
+
   private
     def set_task
       @task = Task.find(params[:id])
     end
 
-    def restaurant_params
-      params.require(:restaurant).permit(:name, :address, :category)
+    def restauratn_params
+      params.permit(:restaurant)
     end
 end

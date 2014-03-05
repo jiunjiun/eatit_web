@@ -35,5 +35,6 @@ $ ->
       for result in results
         name    = $('<h3/>', {html: result.name})
         address = $('<h4/>', {html: result.address})
-        li      = $('<li/>', {class: 'result'}).append(name).append(address)
+        a       = $('<a/>', {href: '/dashboard/tasks/?restaurant='+ result.id, 'data-method': 'post'}).append(name).append(address)
+        li      = $('<li/>', {class: 'result'}).append(a)
         ul.append(li)
