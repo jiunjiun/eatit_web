@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20140302070148) do
   add_index "scores", ["user_id"], name: "index_scores_on_user_id", using: :btree
 
   create_table "tasks", force: true do |t|
-    t.string   "status",        default: "N"
+    t.string   "status",        limit: 1, default: "N"
     t.integer  "user_id"
     t.integer  "restaurant_id"
     t.datetime "created_at"
