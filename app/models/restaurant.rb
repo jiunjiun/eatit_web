@@ -3,7 +3,7 @@ class Restaurant < ActiveRecord::Base
   has_many :task
 
   def self.search(name, address)
-    r = select(:id, :name, :address)
+    r = select(:id, :name, :area, :address, :count)
     if !name.empty? && !address.empty?
       r.where("name like ? && address like ?", "%#{name}%", "%#{address}%")
     elsif !name.empty?

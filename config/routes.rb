@@ -17,7 +17,12 @@ EatitWeb::Application.routes.draw do
         get 'search'
       end
     end
-    resources :tasks
+
+    resources :tasks do
+      collection do
+        get 'finish/:id' => 'tasks#finish', as: 'finish'
+      end
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

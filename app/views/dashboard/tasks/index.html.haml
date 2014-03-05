@@ -1,2 +1,16 @@
 %h1 index-task
 = link_to 'Add Task', new_dashboard_task_path
+
+%table
+  - @tasks.each do |task|
+    %tr
+      %td
+        = link_to 'Finish', finish_dashboard_tasks_path(task)
+      %td
+        = task.restaurant.name
+      %td
+        = task.user.name
+      %td
+        = link_to 'Destroy', dashboard_task_path(task), method: :detele
+      %td
+        = task.status
