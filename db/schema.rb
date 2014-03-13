@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20140302070148) do
     t.string   "area"
     t.string   "address"
     t.string   "telephone"
-    t.integer  "count"
+    t.integer  "count",      default: 0
     t.float    "lat"
     t.float    "long"
     t.datetime "created_at"
@@ -64,13 +64,13 @@ ActiveRecord::Schema.define(version: 20140302070148) do
 
   create_table "scores", force: true do |t|
     t.integer  "restaurant_id"
-    t.integer  "overall"
-    t.integer  "delicious"
-    t.integer  "service"
-    t.integer  "queues"
-    t.integer  "feel"
     t.integer  "user_id"
-    t.string   "comment"
+    t.integer  "overall",       limit: 1,  default: 0
+    t.integer  "delicious",     limit: 1,  default: 0
+    t.integer  "service",       limit: 1,  default: 0
+    t.integer  "queues",        limit: 1,  default: 0
+    t.integer  "feel",          limit: 1,  default: 0
+    t.string   "comment",       limit: 50
     t.datetime "created_at"
     t.datetime "updated_at"
   end

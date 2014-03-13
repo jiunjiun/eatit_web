@@ -1,0 +1,21 @@
+%h1.page-header= @restaurant.name
+
+%p= @restaurant.area + @restaurant.address
+
+%p= @restaurant.category
+
+%p
+  分數
+  %ul
+    - @scores.each do |score, num|
+      %li
+        = "#{score} = #{num}"
+
+%p
+  留言
+  %ul
+    - @score_comments.each do |comment|
+      %li
+        %img{:src => "https://graph.facebook.com/#{comment.user.fb_id}/picture?type=square", :alt => "square"}
+        %a{:href => "http://fb.com/#{comment.user.fb_id}"}= comment.user.name
+        = "說 #{comment.comment}"

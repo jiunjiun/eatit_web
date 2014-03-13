@@ -1,10 +1,22 @@
-%h1 index - Restaurant
-= link_to 'Add', new_dashboard_restaurant_path
+%h1.page-header index - Restaurant
 
-%table
-  - @restaurants.each do |restaurant|
-    %tr
-      %td
-        = restaurant.name
-      %td
-        = restaurant.address
+.row
+  .col-md-2
+    = render 'nav'
+  .col-md-10
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+          %th= t('name')
+          %th= t('address')
+          %th= t('phone')
+      %tbody
+        - @restaurants.each do |restaurant|
+          %tr
+            %td
+            %td
+              = link_to restaurant.name, dashboard_restaurant_path(restaurant)
+            %td= restaurant.area+restaurant.address
+            %td= restaurant.telephone
+    = paginate @restaurants

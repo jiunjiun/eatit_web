@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	def sign_in
+    redirect_to dashboard_root_path if session.has_key?(:UserInfo)
   end
 
   def auth_fb

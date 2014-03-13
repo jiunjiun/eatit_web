@@ -1,12 +1,35 @@
-%h1 New
+%h1
 
-= form_tag search_dashboard_restaurants_path, method: :get, remote: true, id: 'search' do
-  = text_field_tag :name, '', placeholder: '店名'
-  = text_field_tag :address, '', placeholder: '地區、路名'
+= form_tag search_dashboard_restaurants_path, method: :get, remote: true, id: 'search', class: 'form-inline text-center' do
+  .form-group
+    %label.sr-only{:for => ""} '店名'
+    = text_field_tag :name, '', placeholder: '店名', class: 'form-control', autocomplete: 'off'
+  .form-group
+    %label.sr-only{:for => ""} '地區、路名'
+    = text_field_tag :address, '', placeholder: '地區、路名', class: 'form-control', autocomplete: 'off'
+
   = submit_tag 'Search', class: 'btn btn-success'
 
+.page-header
+
 #liveSearch
-  %ul#results
+  .sampleCard.col-sm-6.col-md-4
+    .thumbnail
+      %img{:alt => "", "data-src" => ""}
+        .caption
+          %h3.name
+          %p.address.pull-left
+          %p.text-right
+            %a.btn.btn-success{:href => "#", :role => "button"} Join
+  .hidefood.hide.col-sm-6.col-md-4
+    %h3.name 隱藏美食!!
+    %p.address.pull-left 快來新增!!
+    %p.text-right
+      %a.btn.btn-success{:href => new_dashboard_restaurant_path, :role => "button"} 新增
+  .row
+  / %ul#results.list-group
+= content_for :js do
+  = javascript_include_tag "dashboard/tasks"
 
 
 /= form_for @restaurant, url: {:action=>"create", :controller=>"dashboard/task"} do |f|
