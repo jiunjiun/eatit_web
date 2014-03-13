@@ -1,0 +1,15 @@
+%h1.page-header Finishs-task
+
+.row
+  .col-md-2
+    = render 'nav'
+  .col-md-10
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= t('name')
+      %tbody
+        - @tasks.each do |task|
+          %tr
+            %td= task.restaurant.name
+    = paginate @tasks

@@ -1,5 +1,5 @@
 EatitWeb::Application.routes.draw do
-  root "index#index"
+  root 'index#index'
 
   get  'sign_in'                 => 'users#sign_in'
   get  'auth/:provider/callback' => 'users#auth_fb'
@@ -20,7 +20,8 @@ EatitWeb::Application.routes.draw do
 
     resources :tasks do
       collection do
-        get 'finish/:id' => 'tasks#finish', as: 'finish'
+        post 'finish/:id' => 'tasks#finish',  as: 'finish'
+        get 'finishs'    => 'tasks#finishs', as: 'finishs'
       end
     end
   end

@@ -6,7 +6,7 @@ class CreateRestaurants < ActiveRecord::Migration
       t.string  :area
       t.string  :address
       t.string  :telephone
-      t.integer :count,    defualt: 0
+      t.integer :count,    default: 0
       t.float   :lat
       t.float   :long
 

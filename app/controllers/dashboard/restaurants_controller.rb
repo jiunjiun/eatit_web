@@ -1,6 +1,12 @@
 class Dashboard::RestaurantsController < ApplicationController
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.order("count").page(params[:page]).per(10)
+  end
+
+  def show
+    @restaurant = Restaurant.find(params[:id])
+    @scores = Score.sum(@restaurant)
+    @score_comments = Score.comment(@restaurant)
   end
 
   def new
@@ -27,6 +33,16 @@ class Dashboard::RestaurantsController < ApplicationController
   def destroy
 
   end
+
+  # def search
+  #   @search = Restaurant.search(params[:name], params[:address])
+  #   render json: {results: @search.to_json}
+  # end
+  # def autocomplete_restaurants_name
+  #   # @search = Restaurant.search(params[:term], params[:term])
+  #   @search = Restaurant.where('name like ?' , "%#{params[:term]}%")
+  #   render json: {results: @search.to_json}
+  # end
 
   def search
     @search = Restaurant.search(params[:name], params[:address])

@@ -46,11 +46,14 @@ end
 
 gem 'haml'
 
+gem 'animate'
 gem 'compass-rails'
 
 # bootstrap
 gem 'bootstrap-sass', '~> 3.1.1'
 gem "font-awesome-rails"
+
+gem 'twitter-typeahead-rails'
 
 # config file
 gem 'settingslogic'

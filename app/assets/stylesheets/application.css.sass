@@ -13,6 +13,30 @@
  */
 
 // @import "compass/reset"
-// @import "compass/css3"
+@import "compass/css3"
 @import "bootstrap"
 @import "font-awesome"
+
+
+#nav
+  li a
+    background: none
+  a.navbar-brand
+    color: #666
+    &:hover
+      color: #333
+
+.clear
+  clear: both
+
+html, body
+  height: 100%
+
+#wrap
+  min-height: 100%
+  height: auto
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px
+  /* Pad bottom by footer height */
+  padding: 0 0 60px
+  display: table
