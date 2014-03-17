@@ -1,0 +1,12 @@
+zh-TW:
+  restaurant: '餐廳'
+  task      : '任務'
+  dashboard : 'Dashboard'
+  sign_in   : '登入'
+  sign_out  : '登出'
+
+
+  index:
+    header: '吃吧!!'
+    sub: '紀錄你的美食之旅!!'
+

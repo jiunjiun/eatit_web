@@ -9,6 +9,8 @@ EatitWeb::Application.routes.draw do
   get  'sign_out'                => 'users#sign_out'
   get  'user/account'            => 'users#account'
 
+  resources :restaurants
+
   namespace :dashboard do
     root "index#index"
 
