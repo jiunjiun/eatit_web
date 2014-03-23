@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+
 //= require bootstrap
-//= require_tree .
+//= require scrolling-nav
+//= require float-label-pattern-forms
+
+//= require turbolinks

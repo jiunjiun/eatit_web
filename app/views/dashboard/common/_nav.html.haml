@@ -1,19 +1,25 @@
-#nav.navbar.navbar-inverse
-  .container-fluid
-    .navbar-header
-      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-6", "data-toggle" => "collapse", type: "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      / %a.navbar-brand{href: root_path} Skirt
-    #bs-example-navbar-collapse-6.collapse.navbar-collapse
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a.navbar-brand{href: dashboard_tasks_path} Tasks
-        %li
-          %a.navbar-brand{href: sign_out_path} Sign out
+%nav.navbar.navbar-custom.navbar-fixed-top{:role => "navigation"}
+  .container
+    .navbar-header.page-scroll
+      %button.navbar-toggle{"data-target" => ".navbar-main-collapse", "data-toggle" => "collapse", :type => "button"}
+        %i.fa.fa-bars
+      %a.navbar-brand{:href => root_path}
+        %i.fa.fa-cutlery
+        %span.light Eat it
+    / Collect the nav links, forms, and other content for toggling
+    .collapse.navbar-collapse.navbar-right.navbar-main-collapse
       %ul.nav.navbar-nav
-        %li
-          %a.navbar-brand{href: root_path} Eat it
-    / /.navbar-collapse
+        / Hidden li included to remove active class from about link when scrolled up past about section
+        %li.hidden
+          %a{:href => "#page-top"}
+        %li.page-scroll
+          %a{href: restaurants_path}= t('restaurant')
+        %li.page-scroll
+          %a{href: dashboard_tasks_path}= t('task')
+      %ul.nav.navbar-nav.navbar-right
+        %li.page-scroll
+          - if session.has_key?(:UserInfo)
+            %a{href: dashboard_root_path}= t('dashboard')
+          - else
+            %a{:href => "/auth/facebook"}= t('sign_in')
+

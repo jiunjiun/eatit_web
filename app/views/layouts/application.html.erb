@@ -2,26 +2,20 @@
 <html>
 <head>
   <title>Eat It</title>
-  <%= stylesheet_link_tag    "grayscale" %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-
+  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 <%= render :partial => "common/nav" %>
 
-<%- if params[:controller] == 'index' && params[:action] == 'index' %>
-  <%= yield %>
-<%- else %>
-  <div id="wrap">
-      <div class="container">
-          <%= yield %>
-      </div>
+<div id="wrap">
+  <div class="container">
+    <%= yield %>
   </div>
-<%- end %>
+  <%= render :partial => "common/footer" %>
+</div>
 
-<%= render :partial => "common/footer" %>
-<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-<%= javascript_include_tag "grayscale" %>
+<%= yield :js %>
 </body>
 </html>

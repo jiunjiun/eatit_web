@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eat It</title>
+  <%= stylesheet_link_tag    "grayscale", media: "all" %>
+  <%= stylesheet_link_tag    "index", media: "all", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<%= render :partial => "common/nav" %>
+<%= render :partial => "common/header" %>
+
+<div id="wrap">
+  <div class="container">
+    <%= yield %>
+  </div>
+</div>
+<%= render :partial => "common/footer" %>
+
+<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "scrolling-nav" %>
+</body>
+</html>

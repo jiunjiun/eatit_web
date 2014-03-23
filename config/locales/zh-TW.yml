@@ -1,12 +1,48 @@
 zh-TW:
+  title     : 'Eat it'
   restaurant: '餐廳'
   task      : '任務'
-  dashboard : 'Dashboard'
+  scores    : '評分'
   sign_in   : '登入'
   sign_out  : '登出'
+  setting   : '設定'
+  account   : '個人資料'
 
 
-  index:
-    header: '吃吧!!'
-    sub: '紀錄你的美食之旅!!'
+  new    : '新增'
+  add    : '新增'
+  create : '建立'
+  update : '更新'
+  destroy: '刪除'
+  save   : '儲存'
+  post   : '送出'
+  cancel : '取消'
+
+  user:
+    name: '姓名'
+    email: 'Email'
+
+  overall  : '總分數'
+  delicious: '美味'
+  service  : '服務'
+  queues   : '排隊'
+  feel     : '感覺'
+  comment  : '留言'
+  more     : '更多'
+
+
+  page:
+    index:
+      header: '吃吧!!'
+      sub   : '紀錄你的美食之旅!!'
+
+    sign_in:
+      header      : 'Sign in'
+      sign_in_text: '| Sign in'
+
+    task:
+      header       : '待吃清單'
+      finish_header: '已吃清單'
+      before       : '過去'
+
 
