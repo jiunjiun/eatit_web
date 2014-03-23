@@ -2,18 +2,20 @@
 <html>
 <head>
   <title>Eatit Dashboard</title>
-  <%= stylesheet_link_tag    "dashboard/dashboard", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "dashboard/dashboard", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "grayscale", media: "all" %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= render :partial => "dashboard/common/nav" %>
 <div id="wrap">
-    <%= render :partial => "dashboard/common/nav" %>
-    <div class="container">
-        <%= yield %>
-    </div>
+  <div class="container">
+      <%= yield %>
+  </div>
 </div>
+<%= javascript_include_tag "dashboard/dashboard", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "scrolling-nav" %>
 <%= yield :js %>
 </body>
 </html>

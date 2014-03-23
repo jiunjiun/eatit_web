@@ -1,7 +1,7 @@
 EatitWeb::Application.routes.draw do
   root 'index#index'
 
-  get  'sign_in'                 => 'users#sign_in'
+  # get  'sign_in'                 => 'users#sign_in'
   get  'auth/:provider/callback' => 'users#auth_fb'
   get  'sign_failure'            => 'users#failure'
   # get  'sign_up'                 => 'users#sign_up'
@@ -9,24 +9,39 @@ EatitWeb::Application.routes.draw do
   get  'sign_out'                => 'users#sign_out'
   get  'user/account'            => 'users#account'
 
-  resources :restaurants
 
-  namespace :dashboard do
-    root "index#index"
-
-    resources :restaurants do
-      collection do
-        get 'search'
-      end
-    end
-
-    resources :tasks do
-      collection do
-        post 'finish/:id' => 'tasks#finish',  as: 'finish'
-        get 'finishs'    => 'tasks#finishs', as: 'finishs'
-      end
+  resources :restaurants do
+    collection do
+      get 'search'
     end
   end
+
+  resources :tasks do
+    collection do
+      get  'before/:offset' => 'tasks#before',  as: 'before',     offset: /[0-9]*/
+      post 'finish/:id'     => 'tasks#finish',  as: 'finish'
+      get  'finishs'        => 'tasks#finishs', as: 'finishs'
+      post 'repeat/:id'     => 'tasks#repeat',  as: 'repeat'
+
+    end
+  end
+
+  # namespace :dashboard do
+  #   root "index#index"
+
+  #   resources :restaurants do
+  #     collection do
+  #       get 'search'
+  #     end
+  #   end
+
+  #   resources :tasks do
+  #     collection do
+  #       post 'finish/:id' => 'tasks#finish',  as: 'finish'
+  #       get 'finishs'    => 'tasks#finishs', as: 'finishs'
+  #     end
+  #   end
+  # end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

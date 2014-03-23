@@ -3,7 +3,7 @@
     .navbar-header.page-scroll
       %button.navbar-toggle{"data-target" => ".navbar-main-collapse", "data-toggle" => "collapse", :type => "button"}
         %i.fa.fa-bars
-      %a.navbar-brand{:href => "#page-top"}
+      %a.navbar-brand{:href => root_path}
         %i.fa.fa-cutlery
         %span.light Eat it
     / Collect the nav links, forms, and other content for toggling
@@ -14,10 +14,27 @@
           %a{:href => "#page-top"}
         %li.page-scroll
           %a{href: restaurants_path}= t('restaurant')
+        - if session[:UserInfo]
+          %li.page-scroll
+            %a{href: tasks_path}= t('task')
       %ul.nav.navbar-nav.navbar-right
-        %li.page-scroll
-          - if session.has_key?(:UserInfo)
-            %a{href: dashboard_root_path}= t('dashboard')
-          - else
-            %a{href: sign_in_path}= t('sign_in')
+        - if session.has_key?(:UserInfo)
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %img.img-rounded{:src => "https://graph.facebook.com/#{session[:UserInfo][:fb_id]}/picture?type=normal", :alt => "square"}
+              = session[:UserInfo][:name]
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => user_account_path}
+                  %i.fa.fa-cog
+                  = t('account')
+              %li.divider
+              %li
+                %a{:href => sign_out_path}
+                  %i.fa.fa-power-off
+                  =t('sign_out')
+        - else
+          %li.page-scroll
+            %a{:href => "/auth/facebook"}= t('sign_in')
 

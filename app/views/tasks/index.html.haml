@@ -1,0 +1,136 @@
+.task-index
+  %header.row.page-header
+    .col-md-6
+      %h1= t('page.task.header')
+    .col-md-6
+      .subnav.pull-right
+        %a{:href => new_task_path}
+          %i.fa.fa-plus.fa-2x{title: t('new'), data: {toggle: 'tooltip', placement: 'top'}}
+        %a#before_btn{:href => ''}
+          %i.fa.fa-clock-o.fa-2x{title: t('page.task.before'), data: {toggle: 'tooltip', placement: 'top'}}
+  #tasks.row
+    .col-md-12
+      %table.table
+        %tbody
+          %tr.sample.hide
+            %td
+              %a.finish{data: {target: '#scores', toggle: 'modal', task: ''}}
+                %i.fa.fa-square-o
+                %i.fa.fa-check.doublecheck.fa-1x
+            %td
+              %a{href: ''}
+            %td
+              %a{:href => '', 'data-method'=> 'delete'}
+                %i.fa.fa-times
+          - @tasks.each do |task|
+            %tr{class: "task#{task.id}"}
+              %td
+                %a.finish{data: {target: '#scores', toggle: 'modal', task: task.id}}
+                  %i.fa.fa-square-o
+                  %i.fa.fa-check.doublecheck.fa-1x
+              %td
+                = link_to task.restaurant.name, restaurant_path(task.restaurant)
+              %td
+                %a#delete{:href => task_path(task), data: {method: 'delete', remote: true}}
+                  %i.fa.fa-times
+
+  #before.hide
+    .row.page-header
+      .col-md-12
+        %header
+          %h3= t('page.task.finish_header')
+    .row
+      .col-md-12
+        %table.table
+          %tbody
+            %tr.sample.hide
+              %td
+                %a#repeat{href: '', data: {method: :post, remote: true}}
+                  %i.fa.fa-repeat
+              %td
+                %a{href: ''}
+              %td
+      .col-md-12
+        %a.more.pull-right{:href => ""}
+          = t('more')
+
+  / Modal
+  #scores.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      = form_tag '', id: 'feedback_scores', remote: true do
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+            %h4#myModalLabel.modal-title= t('scores')
+          .modal-body
+            %p= t('overall')
+            %span.star-rating
+              = radio_button_tag 'overall', '1'
+              %i
+              = radio_button_tag 'overall', '2'
+              %i
+              = radio_button_tag 'overall', '3'
+              %i
+              = radio_button_tag 'overall', '4'
+              %i
+              = radio_button_tag 'overall', '5'
+              %i
+            %span.more
+              %i.fa.fa-chevron-circle-down.fa-2x{title: t('more'), data: {toggle: 'tooltip', placement: 'right'}}
+            .detail{style: "display: none;"}
+              %p= t('delicious')
+              %span.star-rating
+                = radio_button_tag 'delicious', '1'
+                %i
+                = radio_button_tag 'delicious', '2'
+                %i
+                = radio_button_tag 'delicious', '3'
+                %i
+                = radio_button_tag 'delicious', '4'
+                %i
+                = radio_button_tag 'delicious', '5'
+                %i
+              %p= t('service')
+              %span.star-rating
+                = radio_button_tag 'service', '1'
+                %i
+                = radio_button_tag 'service', '2'
+                %i
+                = radio_button_tag 'service', '3'
+                %i
+                = radio_button_tag 'service', '4'
+                %i
+                = radio_button_tag 'service', '5'
+                %i
+              %p= t('queues')
+              %span.star-rating
+                = radio_button_tag 'queues', '1'
+                %i
+                = radio_button_tag 'queues', '2'
+                %i
+                = radio_button_tag 'queues', '3'
+                %i
+                = radio_button_tag 'queues', '4'
+                %i
+                = radio_button_tag 'queues', '5'
+                %i
+              %p= t('feel')
+              %span.star-rating
+                = radio_button_tag 'feel', '1'
+                %i
+                = radio_button_tag 'feel', '2'
+                %i
+                = radio_button_tag 'feel', '3'
+                %i
+                = radio_button_tag 'feel', '4'
+                %i
+                = radio_button_tag 'feel', '5'
+                %i
+            -# %strong.choice.pull-right Choose a rating
+            %p= t('comment')
+            = text_area_tag 'comment', '', class: "form-control"
+          .modal-footer
+            = button_tag t('cancel'), data: { :dismiss => "modal" }, class: 'btn btn-default'
+            = submit_tag t('post'), class: 'btn btn-success'
+= content_for :js do
+  = javascript_include_tag "tasks"

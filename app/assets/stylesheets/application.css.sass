@@ -1,43 +1,122 @@
+/*
+ *= require animate
+ */
 
 // @import "compass/reset"
 @import "compass/css3"
 @import "bootstrap"
+
 @import "font-awesome"
+@import "grayscale"
+@import "float-label-pattern-forms"
+@import "star-rating"
+
+// animate
+.fadeInDown
+  @include animation(fadeInDown 0.5s)
+.fadeOutDown
+  @include animation(fadeOutDown 0.5s)
+.fadeInUp
+  @include animation(fadeInUp 0.5s)
+.fadeOutUp
+  @include animation(fadeOutUp 0.5s)
+.wobble
+  @include animation(wobble 1s)
+
+.star-rating
+  @include star-rating(40px)
+
+html
+  position: relative
+  min-height: 100%
+
+body
+  margin-bottom: 90px
+
+.clear
+  clear: both
 
 @media(min-width:767px)
   .top-nav-collapse
     background-color: #8E8E93
 
-#nav
-  li a
-    background: none
-  a.navbar-brand
-    color: #666
-    &:hover
-      color: #333
+.navbar
+  // background-color: #FF9500
+  // @include background(linear-gradient(#1AD6FD, #1D62F0))
+  background-image: url("mooning.png")
 
 
-.intro
-  background-color: #D6CEC3
+  ul li.dropdown
+    a.dropdown-toggle
+      height: 50px
+      padding-top: 7px
+    // a.dropdown-toggle
+      // background-color: #F0F
+    img
+      height: 36px
+      width: 36px
 
-.clear
-  clear: both
+    .dropdown-menu a:hover
+      background-color: #1D62F0
+      color: #fff
 
-html, body
-  height: 100%
+  a:hover
+    color: #fff
 
 #wrap
-  // min-height: 100%
-  // height: auto
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px
-  /* Pad bottom by footer height */
-  padding: 0 0 60px
-  display: table
+  margin-top: 100px
 
 #footer
+  position: absolute
+  bottom: 0
+  width: 100%
   padding-top: 30px
   text-align: center
   height: 90px
+  margin-top: -90px
   color: #fff
   background-color: #4A4A4A
+
+
+// article
+.task-index
+  .subnav
+    padding-top: 35px
+    a
+      padding: 0 5px
+
+  .table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td
+    border: none
+    border-bottom: 2px dashed #ccc
+  .table > thead > tr > th:first-child, .table > thead > tr > td:first-child, .table > tbody > tr > th:first-child, .table > tbody > tr > td:first-child, .table > tfoot > tr > th:first-child, .table > tfoot > tr > td:first-child,
+  .table > thead > tr > th:last-child, .table > thead > tr > td:last-child, .table > tbody > tr > th:last-child, .table > tbody > tr > td:last-child, .table > tfoot > tr > th:last-child, .table > tfoot > tr > td:last-child
+    width: 30px
+
+  .finish
+    position: relative
+    .doublecheck, .doublechecked
+      position: absolute
+      left: 0px
+      top: -1px
+      display: none
+    .doublechecked
+      display: block
+    &:hover
+      .doublecheck
+        display: block
+
+
+  #scores.modal
+    .more i
+      cursor: pointer
+
+
+
+
+.task-new
+  #liveSearch
+  .sampleCard
+    display: none
+  .hidefood
+    float: none
+    margin: 0 auto

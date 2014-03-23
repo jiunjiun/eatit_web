@@ -46,7 +46,7 @@ end
 
 gem 'haml'
 
-gem 'animate'
+gem "animate-rails"
 gem 'compass-rails'
 
 # bootstrap
