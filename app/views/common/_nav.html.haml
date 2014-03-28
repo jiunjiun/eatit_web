@@ -12,8 +12,8 @@
         / Hidden li included to remove active class from about link when scrolled up past about section
         %li.hidden
           %a{:href => "#page-top"}
-        %li.page-scroll
-          %a{href: restaurants_path}= t('restaurant')
+        -# %li.page-scroll
+        -#   %a{href: restaurants_path}= t('restaurant')
         - if session[:UserInfo]
           %li.page-scroll
             %a{href: tasks_path}= t('task')

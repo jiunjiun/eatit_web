@@ -11,43 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140302070148) do
-
-  create_table "friends", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "friends", ["friend_id"], name: "index_friends_on_friend_id", using: :btree
-  add_index "friends", ["user_id"], name: "index_friends_on_user_id", using: :btree
-
-  create_table "gorup_tasks", force: true do |t|
-    t.integer  "task_id"
-    t.integer  "user_id"
-    t.string   "invite_status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "gorup_tasks", ["task_id"], name: "index_gorup_tasks_on_task_id", using: :btree
-  add_index "gorup_tasks", ["user_id"], name: "index_gorup_tasks_on_user_id", using: :btree
-
-  create_table "pictures", force: true do |t|
-    t.integer  "restaurant_id"
-    t.integer  "user_id"
-    t.integer  "task_id"
-    t.string   "name"
-    t.string   "size"
-    t.string   "content_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "pictures", ["restaurant_id"], name: "index_pictures_on_restaurant_id", using: :btree
-  add_index "pictures", ["task_id"], name: "index_pictures_on_task_id", using: :btree
-  add_index "pictures", ["user_id"], name: "index_pictures_on_user_id", using: :btree
+ActiveRecord::Schema.define(version: 20140327053709) do
 
   create_table "restaurants", force: true do |t|
     t.string   "category"
@@ -56,36 +20,38 @@ ActiveRecord::Schema.define(version: 20140302070148) do
     t.string   "address"
     t.string   "telephone"
     t.integer  "count",      default: 0
-    t.float    "lat"
-    t.float    "long"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "scores", force: true do |t|
-    t.integer  "restaurant_id"
     t.integer  "user_id"
-    t.integer  "overall",       limit: 1,  default: 0
-    t.integer  "delicious",     limit: 1,  default: 0
-    t.integer  "service",       limit: 1,  default: 0
-    t.integer  "queues",        limit: 1,  default: 0
-    t.integer  "feel",          limit: 1,  default: 0
-    t.string   "comment",       limit: 50
+    t.integer  "task_id"
+    t.integer  "overall",    limit: 1,  default: 0
+    t.integer  "delicious",  limit: 1,  default: 0
+    t.integer  "service",    limit: 1,  default: 0
+    t.integer  "queues",     limit: 1,  default: 0
+    t.integer  "feel",       limit: 1,  default: 0
+    t.string   "comment",    limit: 50
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "scores", ["restaurant_id"], name: "index_scores_on_restaurant_id", using: :btree
+  add_index "scores", ["task_id"], name: "index_scores_on_task_id", using: :btree
   add_index "scores", ["user_id"], name: "index_scores_on_user_id", using: :btree
 
   create_table "tasks", force: true do |t|
     t.string   "status",        limit: 1, default: "N"
-    t.integer  "user_id"
+    t.string   "url"
     t.integer  "restaurant_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "tasks", ["restaurant_id", "user_id", "url"], name: "index_tasks_on_restaurant_id_and_user_id_and_url", using: :btree
   add_index "tasks", ["restaurant_id"], name: "index_tasks_on_restaurant_id", using: :btree
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 

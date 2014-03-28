@@ -1,33 +1,35 @@
-%h1
-
-= form_tag search_restaurants_path, method: :get, remote: true, id: 'search', class: 'form-inline text-center' do
-  .form-group
-    %label.sr-only{:for => ""} '店名'
-    = text_field_tag :name, '', placeholder: '店名', class: 'form-control', autocomplete: 'off'
-  .form-group
-    %label.sr-only{:for => ""} '地區、路名'
-    = text_field_tag :address, '', placeholder: '地區、路名', class: 'form-control', autocomplete: 'off'
-
-  = submit_tag 'Search', class: 'btn btn-success'
-
-.page-header
-
-#liveSearch
-  .sampleCard.col-sm-6.col-md-4
-    .thumbnail
-      %img{:alt => "", "data-src" => ""}
-        .caption
-          %h3.name
-          %p.address.pull-left
-          %p.text-right
-            %a.btn.btn-success{:href => "#", :role => "button"} Join
-  .hidefood.hide.col-sm-6.col-md-4
-    %h3.name 隱藏美食!!
-    %p.address.pull-left 快來新增!!
-    %p.text-right
-      %a.btn.btn-success{:href => new_restaurant_path, :role => "button"} 新增
+#task-new
+  %h1
   .row
-  / %ul#results.list-group
+    = form_for '', url: {controller: 'tasks', action: 'fetch'}, remote: true, html: {id: 'fetch'} do |f|
+      .col-md-11
+        .form-group.float-label-control
+          = label_tag :url, t('page.task.paste_url'), for: ''
+          = url_field_tag :url, '', :class=>'form-control', value: 'http://doll1027.pixnet.net/blog/post/171945207-%E6%9D%BF%E6%A9%8B%E2%94%82%E8%96%84%E5%A4%9A%E7%BE%A9-bite-2-eat%E2%80%A7q%E6%84%9F%E6%89%8B%E5%B7%A5%E6%8A%AB%E8%96%A9%E3%80%90%E8%AA%A0%E5%93%81%E6%9D%BF'
+      .col-md-1
+        .form-group
+          = submit_tag t('post'), class: 'btn btn-success fetch_btn'
+
+  .row.loading.hide
+    .text-center
+      %i.fa.fa-spinner.fa-spin.fa-5x
+  .row.task_form.hide
+    .col-md-12
+      %h3.page-header= t('page.task.add_header')
+      = form_for '', url: {controller: 'tasks', action: 'create'} do |f|
+        = hidden_field_tag :respone_url
+        .form-group.float-label-control
+          = label_tag :name, t('utile.name'), for: ''
+          = text_field_tag :name, '', :class=>'form-control'
+        .form-group.float-label-control
+          = label_tag :address, t('utile.address'), for: ''
+          = text_field_tag :address, '', :class=>'form-control'
+        .form-group.float-label-control
+          = label_tag :telephone, t('utile.telephone'), for: ''
+          = telephone_field_tag :telephone, '', :class=>'form-control'
+
+        = submit_tag t('post'), class: 'btn btn-success'
+
 = content_for :js do
   = javascript_include_tag "tasks"
 

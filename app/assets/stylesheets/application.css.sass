@@ -10,6 +10,7 @@
 @import "grayscale"
 @import "float-label-pattern-forms"
 @import "star-rating"
+@import "card"
 
 // animate
 .fadeInDown
@@ -79,18 +80,38 @@ body
 
 
 // article
-.task-index
+#task-index
+  #map img
+    max-width: none
+  img
+    max-width: 100%
+
   .subnav
     padding-top: 35px
     a
       padding: 0 5px
 
+  table
+    border-collapse: separate
   .table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td
     border: none
     border-bottom: 2px dashed #ccc
   .table > thead > tr > th:first-child, .table > thead > tr > td:first-child, .table > tbody > tr > th:first-child, .table > tbody > tr > td:first-child, .table > tfoot > tr > th:first-child, .table > tfoot > tr > td:first-child,
   .table > thead > tr > th:last-child, .table > thead > tr > td:last-child, .table > tbody > tr > th:last-child, .table > tbody > tr > td:last-child, .table > tfoot > tr > th:last-child, .table > tfoot > tr > td:last-child
     width: 30px
+
+  .table > thead > tr.sample-card > td, .table > tbody > tr.sample-card > td
+    border: none
+    border-bottom: none
+
+  .table .task_name
+    color: #8E8E93
+    cursor: pointer
+    &:hover
+      color: #4A4A4A
+
+  #before .task_name
+    text-decoration: line-through
 
   .finish
     position: relative
@@ -110,13 +131,6 @@ body
     .more i
       cursor: pointer
 
-
-
-
-.task-new
-  #liveSearch
-  .sampleCard
-    display: none
-  .hidefood
-    float: none
-    margin: 0 auto
+#task-new
+  .loading
+    padding: 150px 0

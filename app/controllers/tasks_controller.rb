@@ -4,36 +4,47 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.where({status: 'N'}).order("updated_at").page(params[:page]).per(10)
+
+    @hash = Gmaps4rails.build_markers(@tasks) do |task, marker|
+      marker.lat task.restaurant.latitude
+      marker.lng task.restaurant.longitude
+    end
+
+    logger.debug { "++++++ #{@hash.to_json}" }
   end
 
   def show
-    render text: 'show'
+    @task
   end
 
   def new
-    # @restaurant = Restaurant.newtaskcon
+
   end
 
   def create
-    @task = Task.new({restaurant_id: params[:restaurant], user_id: session[:UserInfo][:id]})
+    restaurant = Restaurant.new({name: params[:name], address: params[:address], telephone: params[:telephone]})
+    restaurant.save
+    task = Task.new({url: params[:respone_url], restaurant: restaurant, user_id: session[:UserInfo][:id]})
+    task.save
 
-    if @task.save
-      redirect_to dashboard_tasks_path
-    else
-
-    end
+    redirect_to tasks_path
   end
 
   def edit
-
   end
 
   def update
-
   end
 
   def destroy
     @task.destroy
+    render text: ''
+  end
+
+  def fetch
+    @fetch_info = FetchUrl.new(params[:url])
+
+    render json: {info: @fetch_info}
   end
 
   def finishs

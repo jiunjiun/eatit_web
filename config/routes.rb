@@ -19,6 +19,7 @@ EatitWeb::Application.routes.draw do
   resources :tasks do
     collection do
       get  'before/:offset' => 'tasks#before',  as: 'before',     offset: /[0-9]*/
+      post 'fetch'          => 'tasks#fetch',   as: 'fetch'
       post 'finish/:id'     => 'tasks#finish',  as: 'finish'
       get  'finishs'        => 'tasks#finishs', as: 'finishs'
       post 'repeat/:id'     => 'tasks#repeat',  as: 'repeat'

@@ -31,6 +31,13 @@ zh-TW:
   more     : '更多'
 
 
+  utile:
+    name     : '名字'
+    address  : '地址'
+    telephone: '電話'
+    link     : '連結'
+
+
   page:
     index:
       header: '吃吧!!'
@@ -44,5 +51,7 @@ zh-TW:
       header       : '待吃清單'
       finish_header: '已吃清單'
       before       : '過去'
+      paste_url    : '貼上網址'
+      add_header   : '加入任務'
 
 

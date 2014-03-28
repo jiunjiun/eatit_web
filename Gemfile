@@ -69,4 +69,9 @@ gem 'omniauth-facebook'
 gem 'carrierwave'
 gem 'mini_magick'
 
+# url
+gem 'nokogiri'
 
+# google map
+gem 'geocoder'
+gem 'gmaps4rails'

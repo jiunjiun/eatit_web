@@ -12,4 +12,7 @@ class Restaurant < ActiveRecord::Base
       r.where("address like ?", "%#{address}%")
     end
   end
+
+  geocoded_by :address   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
 end

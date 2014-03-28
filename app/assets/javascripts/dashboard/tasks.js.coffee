@@ -77,7 +77,6 @@ $ ->
 
   $(document).on 'ajax:success', 'form#search', (e, data, status, xhr) ->
     liveSearch(data)
-
   # ---- End
 
 

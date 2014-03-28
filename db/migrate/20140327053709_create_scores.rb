@@ -1,8 +1,8 @@
 class CreateScores < ActiveRecord::Migration
   def change
     create_table :scores do |t|
-      t.references :restaurant, index: true
       t.references :user,       index: true
+      t.references :task,       index: true
       t.integer    :overall,    limit: 1   , default: 0
       t.integer    :delicious,  limit: 1   , default: 0
       t.integer    :service,    limit: 1   , default: 0

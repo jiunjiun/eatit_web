@@ -1,6 +1,8 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+#= require underscore
+
 Before_num     = 0
 Before_Display = false
 
@@ -13,7 +15,6 @@ $ ->
         $('.more i').addClass('fa-chevron-circle-down').removeClass('fa-chevron-circle-up')
       else
         $('.more i').addClass('fa-chevron-circle-up').removeClass('fa-chevron-circle-down')
-
 
   $('.finish').click ->
     $(this).find('.doublecheck').addClass('doublechecked')
@@ -48,7 +49,7 @@ $ ->
 
   fbefore = ->
     $.ajax
-      url: "/tasks/before/" + Before_num,
+      url: "/tasks/before/#{Before_num}" ,
       data: {},
       dataType: 'json'
     .done (data) ->
@@ -57,12 +58,12 @@ $ ->
       for task in data.tasks
         tr = before.find('tr.sample').clone()
         tr.removeClass('sample').removeClass('hide').addClass('fadeInUp')
-        tr = tr.addClass("task#{task.id}")
+        tr = tr.addClass("task#{task.id}").attr('data-task', task.id)
         td0 = tr.find('td').eq(0)
         td1 = tr.find('td').eq(1)
 
         td0.find('a').attr('href', "/tasks/repeat/#{task.id}")
-        td1.find('a').attr('href', "/restaurants/#{task.rid}").html(task.name)
+        td1.html(task.name)
         before.find('tbody').append(tr)
 
 
@@ -73,13 +74,13 @@ $ ->
       ->
         $("#before tr.task#{task.id}").hide()
         tasks = $('#tasks').find('tbody')
-        tr = tasks.find('tr.sample').removeClass('hide').addClass("task#{task.id} fadeInUp")
+        tr = tasks.find('tr.sample').removeClass('hide').addClass("task#{task.id} fadeInUp").attr('data-task', task.id)
         td0 = tr.find('td').eq(0)
         td1 = tr.find('td').eq(1)
         td2 = tr.find('td').eq(2)
 
         td0.find('a').attr('data-task', task.id)
-        td1.find('a').attr('href', "/restaurants/#{task.rid}").html(task.name)
+        td1.html(task.name)
         td2.find('a').attr('href', "/tasks/#{task.id}")
 
         tasks.append(tr)
@@ -94,53 +95,102 @@ $ ->
         tr.hide()
       , 500
     )
+
+  $(document).on 'click', 'tbody td.task_name', ->
+    opt  = $(this)
+    fold = opt.parents('tr').attr('data-fold')
+    if fold is 'close'
+      task_id = opt.parents('tr').data('task')
+      opt.parents('tr').attr('data-fold', 'open')
+      $.ajax
+        url: "/tasks/#{task_id}",
+        data: {},
+        dataType: 'json'
+      .done (data) ->
+        index = opt.parents('tr').index()
+
+        card = $('.sample-card').clone().removeClass('hide')
+        card.find('.header h4').html(data.name)
+        card.find('.address a').attr('href', "https://www.google.com/maps/search/#{data.address}/17z").html(data.address)
+        card.find('.telephone a').attr('href', "tel:#{data.telephone}").html(data.telephone)
+        card.find('.link a').attr('href', data.url)
+
+        tr = opt.parents('.table').find("tr:eq(#{index})")
+        card.addClass('fadeInDown').insertAfter(tr)
+
+        $('i').tooltip()
+    else
+      opt.parents('tr').attr('data-fold', 'close')
+      index = opt.parents('tr').index() + 1
+      tr = opt.parents('.table').find("tr:eq(#{index})")
+      tr.addClass('fadeOutUp')
+      setTimeout(
+        ->
+          tr.remove()
+        , 500
+      )
+    false
   # ---- Ends
 
   # ---- New Task
-  $("#name, #address").keyup (event) ->
-    name    = $("#name").val()
-    address = $("#address").val()
+  $(".float-label-control").floatLabels()
 
-    if(name.length > 0 || address.length > 0)
-      $.ajax
-        url: "/restaurants/search",
-        data: { name : name, address: address },
-        dataType: 'json'
-      .done (data) ->
-        liveSearch(data)
-    else if name.length is 0 && address.length is 0
-      $('#liveSearch > .row').html('')
+  $('#url').keyup (event) ->
+    task_form_reset() if event.keyCode is 13
 
-  liveSearch = (data) ->
-    $('#liveSearch > .row').html('')
 
-    results = JSON.parse data['results']
-    if results.length isnt 0
-      ALL_order = results.length
-      order_num = 0
-      for result in results
-        params = {
-          id        : result.id
-          name      : result.name
-          telephone : result.telephone
-          area      : result.area
-          address   : result.address
-          count     : result.count
-        }
-        displayResultToPage(params)
-    else
-      sampleCard = $('.hidefood').clone().removeClass('hide')
-      $('.row').append(sampleCard)
+  $('.fetch_btn').click ->
+    task_form_reset()
 
-  displayResultToPage = (params) ->
-    sampleCard = $('.sampleCard').clone().removeClass('sampleCard')
-    sampleCard.find('.name').html(params.name)
-    sampleCard.find('.address').html(params.address)
+  task_form_reset = ->
+    $('.loading').removeClass('hide')
+    $('.task_form').addClass('hide')
 
-    sampleCard.find('a').attr('href', '/tasks/?restaurant='+ params.id).attr('data-method': 'post')
-    $('.row').append(sampleCard)
+  $(document).on 'ajax:success', 'form#fetch', (e, data, status, xhr) ->
+    if data.info
+      fetch_info = data.info
 
-  $(document).on 'ajax:success', 'form#search', (e, data, status, xhr) ->
-    liveSearch(data)
+      $('.hide').removeClass('hide').addClass('fadeInDown')
+      $('.loading').addClass('hide')
 
-  # ---- End
+      $('#respone_url').val($('#url').val())
+      $('#name').val(fetch_info.title)
+      $('#address').val(fetch_info.address[0])
+      $('#telephone').val(fetch_info.telephone[0])
+
+      $(".float-label-control").floatLabels()
+
+
+
+
+
+# handler = Gmaps.build("Google")
+
+# handler.buildMap
+#   provider:
+#     zoom: 15
+#     center: new google.maps.LatLng(22.6875, 120.307)
+#     mapTypeId: google.maps.MapTypeId.ROADMAP
+#     panControl: false
+#     zoomControl: false
+#     mapTypeControl: false
+#     scaleControl: false
+#     # streetViewControl: false
+#     overviewMapControl: false
+#     disableDefaultUI: false
+#   internal:
+#     id: "map"
+# , ->
+#   markers = handler.addMarkers([
+#     lat: 22.6875
+#     lng: 120.307
+#     infowindow: "hello!"
+#   ])
+#   # handler.bounds.extendWith markers
+#   # handler.fitMapToBounds()
+#   # handler.getMap().setZoom(16)
+#   return
+
+
+
+

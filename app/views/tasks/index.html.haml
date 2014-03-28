@@ -1,4 +1,4 @@
-.task-index
+#task-index
   %header.row.page-header
     .col-md-6
       %h1= t('page.task.header')
@@ -8,31 +8,54 @@
           %i.fa.fa-plus.fa-2x{title: t('new'), data: {toggle: 'tooltip', placement: 'top'}}
         %a#before_btn{:href => ''}
           %i.fa.fa-clock-o.fa-2x{title: t('page.task.before'), data: {toggle: 'tooltip', placement: 'top'}}
+
   #tasks.row
     .col-md-12
       %table.table
         %tbody
-          %tr.sample.hide
+          %tr.sample.hide{data: {task: '', fold: 'close'}}
             %td
               %a.finish{data: {target: '#scores', toggle: 'modal', task: ''}}
                 %i.fa.fa-square-o
                 %i.fa.fa-check.doublecheck.fa-1x
-            %td
-              %a{href: ''}
+            %td.task_name
             %td
               %a{:href => '', 'data-method'=> 'delete'}
                 %i.fa.fa-times
+          %tr.sample-card.hide
+            %td{colspan: 3}
+              #show_task_detail.card
+                .row
+                  .col-md-12.header
+                    %h4= '板橋│薄多義 BITE 2 EAT‧Q感手工披薩【誠品板橋店】'
+                  .col-md-3
+                    %h5.address
+                      %i.fa.fa-map-marker{title: t('utile.address'), data: {toggle: 'tooltip', placement: 'top'}}
+                      %a{:href => "https://www.google.com/maps/search/高雄市左營區站前北路1號/17z", target: "_blank"}
+                      -# %a{:href => "https://www.google.com/maps/search/22.6875,120.307/17z", target: "_blank"} 高雄市左營區站前北路1號
+                    %h5.telephone
+                      %i.fa.fa-phone{title: t('utile.telephone'), data: {toggle: 'tooltip', placement: 'top'}}
+                      %a{:href => "tel:07-5811112"}
+
+                    %h5.link
+                      %i.fa.fa-external-link{title: t('utile.link'), data: {toggle: 'tooltip', placement: 'top'}}
+                      %a{:href => "http://doll1027.pixnet.net/blog/post/171945207-%E6%9D%BF%E6%A9%8B%E2%94%82%E8%96%84%E5%A4%9A%E7%BE%A9-bite-2-eat%E2%80%A7q%E6%84%9F%E6%89%8B%E5%B7%A5%E6%8A%AB%E8%96%A9%E3%80%90%E8%AA%A0%E5%93%81%E6%9D%BF", target: "_blank"}= t('utile.link')
+
           - @tasks.each do |task|
-            %tr{class: "task#{task.id}"}
+            %tr{data: {task: task.id, fold: 'close'}}
               %td
                 %a.finish{data: {target: '#scores', toggle: 'modal', task: task.id}}
                   %i.fa.fa-square-o
                   %i.fa.fa-check.doublecheck.fa-1x
-              %td
-                = link_to task.restaurant.name, restaurant_path(task.restaurant)
+              %td.task_name
+                = task.restaurant.name
               %td
                 %a#delete{:href => task_path(task), data: {method: 'delete', remote: true}}
                   %i.fa.fa-times
+
+
+    -# .map
+    -#   #map{:style => "height: 200px;"}
 
   #before.hide
     .row.page-header
@@ -43,12 +66,11 @@
       .col-md-12
         %table.table
           %tbody
-            %tr.sample.hide
+            %tr.sample.hide{data: {task: '', fold: 'close'}}
               %td
                 %a#repeat{href: '', data: {method: :post, remote: true}}
                   %i.fa.fa-repeat
-              %td
-                %a{href: ''}
+              %td.task_name
               %td
       .col-md-12
         %a.more.pull-right{:href => ""}
@@ -132,5 +154,14 @@
           .modal-footer
             = button_tag t('cancel'), data: { :dismiss => "modal" }, class: 'btn btn-default'
             = submit_tag t('post'), class: 'btn btn-success'
+
+
 = content_for :js do
+  = javascript_include_tag "//maps.google.com/maps/api/js?v=3.13&amp;&amp;libraries=geometry&sensor=false"
+  = javascript_include_tag "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"
+  = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/gmaps4rails/2.1.2/gmaps4rails.min.js"
   = javascript_include_tag "tasks"
+
+
+
+
