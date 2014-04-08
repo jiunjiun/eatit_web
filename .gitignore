@@ -37,4 +37,4 @@ pickle-email-*.html
 
 # config setting
 /config/*.yml
-.rake
+/lib/tasks/*.rake
