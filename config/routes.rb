@@ -21,12 +21,12 @@ EatitWeb::Application.routes.draw do
       get  'before/:offset' => 'tasks#before',  as: 'before',     offset: /[0-9]*/
       post 'fetch'          => 'tasks#fetch',   as: 'fetch'
       post 'finish/:id'     => 'tasks#finish',  as: 'finish'
-      get  'finishs'        => 'tasks#finishs', as: 'finishs'
+      # get  'finished'       => 'tasks#finished', as: 'finished'
       post 'repeat/:id'     => 'tasks#repeat',  as: 'repeat'
-
     end
   end
 
+  get '/:fb_id' => 'users#index', as:'index', fb_id: /[0-9]*/
   # namespace :dashboard do
   #   root "index#index"
 

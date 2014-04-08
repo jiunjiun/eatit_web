@@ -17,6 +17,7 @@ zh-TW:
   save   : '儲存'
   post   : '送出'
   cancel : '取消'
+  back   : '返回'
 
   user:
     name: '姓名'

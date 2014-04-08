@@ -8,8 +8,14 @@ class FetchUrl
     domain = URI.parse(url).host
     case domain
     when /.pixnet.net/
-      pixnet_regular(url)
+      @result = pixnet_regular(url)
+    else
+      @result = {}
     end
+  end
+
+  def get_result
+    @result
   end
 
   private
@@ -70,6 +76,7 @@ class FetchUrl
 
       doc = Nokogiri::HTML(open(url))
       @title  = doc.css('.article-head h2 a').text
+      @name  = doc.css('.article-head h2 a').text
       @img    = doc.css('.article-content-inner img')
       article = doc.css('.article-content-inner p').map(&:text)
       address = telephone = []
@@ -86,6 +93,8 @@ class FetchUrl
           end
         end
       end
+
+      return {name: @name, address: @address, telephone: @telephone, img: @img}
     end
 
 end

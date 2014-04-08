@@ -3,6 +3,7 @@ class CreateScores < ActiveRecord::Migration
     create_table :scores do |t|
       t.references :user,       index: true
       t.references :task,       index: true
+      t.references :restaurant, index: true
       t.integer    :overall,    limit: 1   , default: 0
       t.integer    :delicious,  limit: 1   , default: 0
       t.integer    :service,    limit: 1   , default: 0

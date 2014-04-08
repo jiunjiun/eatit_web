@@ -1,0 +1,21 @@
+.container
+  .page-header.text-center
+    %h1#timeline Timeline 2.1
+  %ul.timeline
+    - @user_tasks.each_with_index do |task, index|
+      %li{class: cycle('', 'timeline-inverted')}
+        .timeline-badge.primary
+          %a
+            %i.glyphicon.glyphicon-record{:id => "", :rel => "tooltip", :title => "11 hours ago via Twitter"}
+        .timeline-panel
+          .timeline-heading
+            %img.img-responsive{:src => "http://lorempixel.com/1600/500/sports/2"}/
+          .timeline-body
+            %p= task.name
+          .timeline-footer
+            %a
+              %i.glyphicon.glyphicon-thumbs-up
+            %a
+              %i.glyphicon.glyphicon-share
+            %a.pull-right Continuar Lendo
+    %li.clearfix{:style => "float: none;"}

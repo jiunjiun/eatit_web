@@ -13,6 +13,13 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
-  geocoded_by :address   # can also be an IP address
-  after_validation :geocode          # auto-fetch coordinates
+  before_save :create_restaurant
+
+  private
+    def create_restaurant
+      self.area = self.address[0...3]
+    end
+
+    geocoded_by :address   # can also be an IP address
+    after_validation :geocode          # auto-fetch coordinates
 end

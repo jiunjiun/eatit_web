@@ -52,10 +52,7 @@
               %td
                 %a#delete{:href => task_path(task), data: {method: 'delete', remote: true}}
                   %i.fa.fa-times
-
-
-    -# .map
-    -#   #map{:style => "height: 200px;"}
+            %tr.detail_card
 
   #before.hide
     .row.page-header
@@ -157,9 +154,9 @@
 
 
 = content_for :js do
-  = javascript_include_tag "//maps.google.com/maps/api/js?v=3.13&amp;&amp;libraries=geometry&sensor=false"
-  = javascript_include_tag "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"
-  = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/gmaps4rails/2.1.2/gmaps4rails.min.js"
+  -# = javascript_include_tag "//maps.google.com/maps/api/js?v=3.13&amp;&amp;libraries=geometry&sensor=false"
+  -# = javascript_include_tag "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"
+  -# = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/gmaps4rails/2.1.2/gmaps4rails.min.js"
   = javascript_include_tag "tasks"
 
 

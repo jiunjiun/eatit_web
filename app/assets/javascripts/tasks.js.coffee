@@ -23,11 +23,15 @@ $ ->
 
   $('#scores').on 'hide.bs.modal', (e) ->
     $('.doublechecked').removeClass('doublechecked')
+    $('input[type=radio]').removeAttr('checked')
 
   $(document).on 'ajax:success', 'form#feedback_scores', (e, data, status, xhr) ->
     if data.status is 'Y'
       $('#scores').modal('hide')
-      $('table tr.task' + data.id).remove()
+      $("#tasks tr[data-task=#{data.id}]").addClass('fadeOutUp')
+      setTimeout ->
+        $("#tasks tr[data-task=#{data.id}]").removeClass('fadeOutUp').remove()
+      , 500
     else
       $('.modal-dialog').addClass('wobble')
       setTimeout ->
@@ -65,6 +69,9 @@ $ ->
         td0.find('a').attr('href', "/tasks/repeat/#{task.id}")
         td1.html(task.name)
         before.find('tbody').append(tr)
+
+        tr_detail_card = $('<tr/>', {class: 'detail_card'})
+        before.find('tbody').append(tr_detail_card)
 
 
   $(document).on 'ajax:success', '#repeat', (e, data, status, xhr) ->
@@ -105,28 +112,29 @@ $ ->
       $.ajax
         url: "/tasks/#{task_id}",
         data: {},
-        dataType: 'json'
+        dataType: 'json',
       .done (data) ->
         index = opt.parents('tr').index()
 
-        card = $('.sample-card').clone().removeClass('hide')
+        card = $('.sample-card td').clone().removeClass('hide')
         card.find('.header h4').html(data.name)
         card.find('.address a').attr('href', "https://www.google.com/maps/search/#{data.address}/17z").html(data.address)
         card.find('.telephone a').attr('href', "tel:#{data.telephone}").html(data.telephone)
         card.find('.link a').attr('href', data.url)
 
-        tr = opt.parents('.table').find("tr:eq(#{index})")
-        card.addClass('fadeInDown').insertAfter(tr)
+        tr = opt.parents('.table').find("tr:eq(#{index + 1})")
+        card.addClass('fadeInDown')
+        tr.append(card)
 
         $('i').tooltip()
     else
       opt.parents('tr').attr('data-fold', 'close')
       index = opt.parents('tr').index() + 1
       tr = opt.parents('.table').find("tr:eq(#{index})")
-      tr.addClass('fadeOutUp')
+      tr.find('td').addClass('fadeOutUp')
       setTimeout(
         ->
-          tr.remove()
+          tr.find('td').remove()
         , 500
       )
     false
@@ -147,14 +155,12 @@ $ ->
     $('.task_form').addClass('hide')
 
   $(document).on 'ajax:success', 'form#fetch', (e, data, status, xhr) ->
+    $('.hide').removeClass('hide').addClass('fadeInDown')
+    $('.loading').addClass('hide')
     if data.info
       fetch_info = data.info
-
-      $('.hide').removeClass('hide').addClass('fadeInDown')
-      $('.loading').addClass('hide')
-
       $('#respone_url').val($('#url').val())
-      $('#name').val(fetch_info.title)
+      $('#name').val(fetch_info.name)
       $('#address').val(fetch_info.address[0])
       $('#telephone').val(fetch_info.telephone[0])
 

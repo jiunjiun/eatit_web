@@ -5,7 +5,7 @@
       .col-md-11
         .form-group.float-label-control
           = label_tag :url, t('page.task.paste_url'), for: ''
-          = url_field_tag :url, '', :class=>'form-control', value: 'http://doll1027.pixnet.net/blog/post/171945207-%E6%9D%BF%E6%A9%8B%E2%94%82%E8%96%84%E5%A4%9A%E7%BE%A9-bite-2-eat%E2%80%A7q%E6%84%9F%E6%89%8B%E5%B7%A5%E6%8A%AB%E8%96%A9%E3%80%90%E8%AA%A0%E5%93%81%E6%9D%BF'
+          = url_field_tag :url, '', :class=>'form-control', value: ''
       .col-md-1
         .form-group
           = submit_tag t('post'), class: 'btn btn-success fetch_btn'
@@ -28,6 +28,7 @@
           = label_tag :telephone, t('utile.telephone'), for: ''
           = telephone_field_tag :telephone, '', :class=>'form-control'
 
+        = link_to t('back'), tasks_path, class: 'btn btn-default'
         = submit_tag t('post'), class: 'btn btn-success'
 
 = content_for :js do
