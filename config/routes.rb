@@ -26,7 +26,7 @@ EatitWeb::Application.routes.draw do
     end
   end
 
-  get '/:fb_id' => 'users#index', as:'index', fb_id: /[0-9]*/
+  get '/:fb_username' => 'users#index', as: 'user_page'
   # namespace :dashboard do
   #   root "index#index"
 

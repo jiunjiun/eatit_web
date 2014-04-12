@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
-    @user_tasks = Task.joins(:user).where({users: {fb_id: params[:fb_id]}, status: 'Y'})
+    @user_tasks = Task.joins(:user).where({users: {username: params[:fb_username]}, status: 'Y'})
+    @user_info = User.where({username: params[:fb_username]}).first
     # render text: @user_tasks.to_json
   end
 
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
                               })
         authUser.save
       end
-      session[:UserInfo] = { id: authUser.id, fb_id: authUser.fb_id, name: authUser.name}
+      session[:UserInfo] = { id: authUser.id, fb_id: authUser.fb_id, name: authUser.name, username: authUser.username}
       redirect_to root_path
     else
       redirect_to sign_failure_path

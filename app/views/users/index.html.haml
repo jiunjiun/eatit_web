@@ -1,21 +1,28 @@
 .container
   .page-header.text-center
-    %h1#timeline Timeline 2.1
+    %img.img-circle{:src => "https://graph.facebook.com/#{@user_info.fb_id}/picture?type=large", :alt => @user_info.username, width: 120}
+    %h1#timeline
+      = @user_info.name
   %ul.timeline
-    - @user_tasks.each_with_index do |task, index|
+    - @user_tasks.each do |task|
       %li{class: cycle('', 'timeline-inverted')}
         .timeline-badge.primary
           %a
             %i.glyphicon.glyphicon-record{:id => "", :rel => "tooltip", :title => "11 hours ago via Twitter"}
+
         .timeline-panel
+          .triangle
+            %i.fa.fa-star.fa-2x
           .timeline-heading
-            %img.img-responsive{:src => "http://lorempixel.com/1600/500/sports/2"}/
+            -# %img.img-responsive{:src => "http://lorempixel.com/1600/500/sports/2"}/
           .timeline-body
             %p= task.name
           .timeline-footer
             %a
               %i.glyphicon.glyphicon-thumbs-up
-            %a
-              %i.glyphicon.glyphicon-share
-            %a.pull-right Continuar Lendo
+            -# %a
+            -#   %i.glyphicon.glyphicon-share
+            -# %a.pull-right Continuar Lendo
+            .pull-right
+              .fb-like{"data-action" => "like", "data-href" => task_path(task), "data-layout" => "button_count", "data-share" => "true", "data-show-faces" => "true"}
     %li.clearfix{:style => "float: none;"}

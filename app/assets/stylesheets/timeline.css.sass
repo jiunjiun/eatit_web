@@ -143,21 +143,34 @@
     border-right: 5px solid transparent
     border-top: 0 solid #000
 
-.tooltip-inner
-  width: 200px
-  padding: 3px 8px
-  color: #fff
-  text-align: center
-  text-decoration: none
-  background-color: #313131
-  -webkit-border-radius: 0px
-  -moz-border-radius: 0px
-  border-radius: 0px
+// .tooltip-inner
+//   width: 200px
+//   padding: 3px 8px
+//   color: #fff
+//   text-align: center
+//   text-decoration: none
+//   background-color: #313131
+//   -webkit-border-radius: 0px
+//   -moz-border-radius: 0px
+//   border-radius: 0px
 
-.tooltip-arrow
-  position: absolute
+// .tooltip-arrow
+//   position: absolute
+//   width: 0
+//   height: 0
+.triangle
   width: 0
   height: 0
+  border-top: 70px solid #4A4A4A
+  border-right: 70px solid transparent
+  // box-shadow: 7px 7px 7px rgba(0,0,0,0.3)
+  position: relative
+
+  .fa-star
+    position: absolute
+    color: #FFCD02
+    top: -60px
+    left: 6px
 
 .timeline > li
   &.timeline-inverted

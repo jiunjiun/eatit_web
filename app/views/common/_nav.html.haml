@@ -21,10 +21,14 @@
         - if session.has_key?(:UserInfo)
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              %img.img-rounded{:src => "https://graph.facebook.com/#{session[:UserInfo][:fb_id]}/picture?type=normal", :alt => "square"}
+              %img.img-rounded{:src => "https://graph.facebook.com/#{session[:UserInfo][:fb_id]}/picture?type=normal", :alt => session[:UserInfo][:name]}
               = session[:UserInfo][:name]
               %b.caret
             %ul.dropdown-menu
+              %li
+                %a{:href => user_page_path(session[:UserInfo][:username])}
+                  %i.fa.fa-user
+                  = t('nav.user_page')
               %li
                 %a{:href => user_account_path}
                   %i.fa.fa-cog

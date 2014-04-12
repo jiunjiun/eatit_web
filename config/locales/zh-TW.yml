@@ -38,7 +38,8 @@ zh-TW:
     telephone: '電話'
     link     : '連結'
 
-
+  nav:
+    user_page: '個人紀錄'
   page:
     index:
       header: '吃吧!!'
