@@ -41,17 +41,20 @@ class TasksController < ApplicationController
 
   def fetch
     task = Task.where({url: params[:url]})
+
     if task.count > 0
       @fetch_info = task.first
+      logger.debug { " +_____ #{task.first.to_json}" }
     else
       fu = FetchUrl.new(params[:url])
       @fetch_info = fu.get_result
     end
 
     result = {}
-    if !@fetch_info.empty?
-      result = {info: @fetch_info}
-    end
+    result = {info: @fetch_info} if @fetch_info
+
+    logger.debug { "++++ #{@fetch_info}" }
+
 
     render json: result
   end

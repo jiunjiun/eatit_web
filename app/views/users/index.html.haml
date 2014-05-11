@@ -1,7 +1,7 @@
 .container
   .page-header.text-center
     %img.img-circle{:src => "https://graph.facebook.com/#{@user_info.fb_id}/picture?type=large", :alt => @user_info.username, width: 120}
-    %h1#timeline
+    %h2#timeline
       = @user_info.name
   %ul.timeline
     - @user_tasks.each do |task|
@@ -11,8 +11,8 @@
             %i.glyphicon.glyphicon-record{:id => "", :rel => "tooltip", :title => "11 hours ago via Twitter"}
 
         .timeline-panel
-          .triangle
-            %i.fa.fa-star.fa-2x
+          -# .triangle
+          %i.fa.fa-star.fa-3x
           .timeline-heading
             -# %img.img-responsive{:src => "http://lorempixel.com/1600/500/sports/2"}/
           .timeline-body
